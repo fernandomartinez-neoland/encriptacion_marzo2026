@@ -4,7 +4,6 @@ import bcrypt from 'bcrypt'
 const saltRounds = 10
 
 export async function registerService(userData) {
-    console.log(userData)
     try {
         const hashedpass = await bcrypt.hash(userData.password, saltRounds);
         const user = await userModel();
