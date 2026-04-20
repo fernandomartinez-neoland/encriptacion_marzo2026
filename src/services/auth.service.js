@@ -7,7 +7,6 @@ export async function registerService(userData) {
     console.log(userData)
     try {
         const hashedpass = await bcrypt.hash(userData.password, saltRounds);
-        console.log("clave hasheada: ", await hashedpass)
         const user = await userModel();
         const nuevoUsuario = await new user({
             nombre: userData.nombre,
