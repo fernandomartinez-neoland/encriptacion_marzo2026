@@ -5,8 +5,28 @@ const saltRounds = 10
 
 export async function registerService(userData) {
     console.log(userData)
-    const hashedpass = bcrypt.hash(userData.password, saltRounds);
-    console.log("clave hasheada: ", await hashedpass)
-    const user = await userModel();
-    return user.find({});
+    try {
+        const hashedpass = await bcrypt.hash(userData.password, saltRounds);
+        console.log("clave hasheada: ", await hashedpass)
+        const user = await userModel();
+        const nuevoUsuario = await new user({
+            nombre: userData.nombre,
+            apellido: userData.apellido,
+            email: userData.email,
+            password: hashedpass
+        });
+
+        nuevoUsuario.save();
+
+        return {
+            status: 201,
+            message:"usuario guardado"
+        }
+    } catch (e) {
+        console.log(e)
+        return {
+            status: 409,
+            message:"usuario NO guardado"
+        }
+    }
 }
