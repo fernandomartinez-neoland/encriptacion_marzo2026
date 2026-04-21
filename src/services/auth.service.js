@@ -1,5 +1,6 @@
 import userModel from '../models/user.model.js';
 import bcrypt from 'bcrypt'
+import { createToken } from './token.service.js';
 
 const saltRounds = 10
 
@@ -42,10 +43,18 @@ export async function loginService(userData) {
         const compare = await bcrypt.compare(password, usuario.password)
         // bcrypt compare devuelve true o false si la clave es correcta o no, si no es correcta devolvemos en la api un 404 con un mensaje ambiguo
         if (!compare) return { status: 401, message: "Usuario o clave incorrecto" }
-
+        const userInfo = {
+            nombre: usuario.nombre,
+            apellido: usuario.apellido,
+            correo: usuario.email
+        }
         return {
             status: 200,
-            message: usuario
+            message: {
+                usuario,
+                token: createToken(userInfo)
+            }
+
         };
     } catch (e) {
         return {
