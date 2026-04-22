@@ -12,5 +12,5 @@ export async function loginController(req, res) {
 
 export async function userInfoController(req, res){
     const userInfo=await userInfoService(req.body)
-    res.status(userInfo.status).json({message:userInfo.message})
+    res.status(userInfo.status).json(userInfo.message)
 }
