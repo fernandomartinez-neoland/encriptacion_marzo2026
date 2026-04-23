@@ -4,8 +4,8 @@
   "description": "��#\u0000 \u0000e\u0000n\u0000c\u0000r\u0000i\u0000p\u0000t\u0000a\u0000c\u0000i\u0000o\u0000n\u0000_\u0000m\u0000a\u0000r\u0000z\u0000o\u00002\u00000\u00002\u00006\u0000\r\u0000 \u0000",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev":"nodemon index.js"
+    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js",
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
     "bcrypt": "^6.0.0",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "jest": "^30.3.0",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.4.1"
   },
